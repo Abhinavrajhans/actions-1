@@ -6,11 +6,19 @@ jobs:
   first_job:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       - name: Welcome message
         run: echo "My first Github Actions Job"
 
       - name: List files
         run: ls
 
-      - name: Read file
-        run: cat README.md
+      - name: Check if README.md exists
+        run: |
+          if [ -f README.md ]; then
+            cat README.md
+          else
+            echo "README.md not found"
+          fi
